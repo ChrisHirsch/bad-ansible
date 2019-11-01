@@ -1,0 +1,17 @@
+---
+- name: install PostreSQL
+  yum:
+    name: postgresql-server
+    state: latest
+- name: enable PostgreSQL on boot
+  service:
+    name: postgresql
+    state: started
+    enabled: yes
+- name: Check install
+  stat:
+    path: /var/lib/pgsql/data 
+  register: file_details
+- name: initilize postgres
+  command: postgresql-setup initdb
+  when: not file_details.stat.exists
