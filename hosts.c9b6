@@ -1,0 +1,33 @@
+[3tierapp:vars]
+
+###########################################################################
+### Ansible Vars
+###########################################################################
+timeout=60
+ansible_become=yes
+ansible_user=ec2-user
+ansible_ssh_private_key_file="~/.ssh/c9b6key.pem"
+ansible_ssh_common_args="-o StrictHostKeyChecking=no"
+[3tierapp:children]
+frontends
+apps
+appdbs
+support
+
+
+[frontends]
+## These are the frontends
+frontend1.c9b6.internal ansible_ssh_host=3.208.193.219
+
+[apps]
+## These are the apps
+app1.c9b6.internal ansible_ssh_host=52.205.33.159
+app2.c9b6.internal ansible_ssh_host=3.232.221.191
+
+[appdbs]
+## These are the appdbs
+appdb1.c9b6.internal ansible_ssh_host=52.3.56.58
+
+## These are the support
+[support]
+support1.c9b6.internal ansible_ssh_host=52.73.6.16
