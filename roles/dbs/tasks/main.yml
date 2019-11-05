@@ -3,13 +3,12 @@
   yum:
     name: postgresql-server
     state: latest
-- name: Check install
-  stat:
-    path: /var/lib/pgsql/data/pg_clog
-  register: file_details
+
 - name: initilize postgres
   command: postgresql-setup initdb
-  when: not file_details.stat.exists
+  args:
+      creates: /var/lib/pgsql/data/pg_clog
+
 - name: enable PostgreSQL on boot
   service:
     name: postgresql

@@ -1,4 +1,6 @@
+GUID=c9b6
 run:
+	echo $GUID
 	ansible-playbook main.yml -e "GUID=${GUID}"  -i ./hosts.c9b6
 
 check:

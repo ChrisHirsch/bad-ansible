@@ -1,2 +1,5 @@
 ---
-# handlers file for apps
+- name: restart tomcat
+  service:
+    name: httpd
+    state: restarted
